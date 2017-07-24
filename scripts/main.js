@@ -29,11 +29,12 @@ $.ajax({
 });
 
 
-// // Randomly set background image
-
-let arr = ['background-1.png', 'background-2.png', 'background-3.png']
-let imageUrl = arr[(Math.floor(Math.random() * 3))];
-let i = 'url(../images/' + imageUrl + ')  no-repeat center center fixed';
+// Randomly set background image
+let imgURL =      ['night.png',       'rocks.jpg',       'snow.png',          'tree.png',         'wagon.jpg',      'hug.png',      'faces.png']
+let imgPosition = ['center bottom',   'center bottom',    'center bottom',    'center center',    'left bottom',    'right bottom', 'right bottom']
+let index = Math.floor(Math.random() * imgURL.length)
+let i = 'url(../images/' + imgURL[index] + ')  no-repeat '
+                         + imgPosition[index] + ' fixed';
 $('#main').css({
   'background': i,
   'background-size': 'cover'
