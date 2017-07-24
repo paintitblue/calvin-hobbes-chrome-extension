@@ -1,8 +1,10 @@
+// Get the date
+const now = new Date();
+$('#date').html(now.toDateString());
 
-// Fetch Comic
+//Get the comic
 const url = "http://www.gocomics.com/calvinandhobbes";
 const obj = localStorage.getItem('calvinandhobbes_url');
-const currDate = new Date();
 if (obj) {
     $('#comic').attr('src', obj);
 }
@@ -26,12 +28,6 @@ $.ajax({
   console(err);
 });
 
-// Get the time
-function setDate() {
-    const now = new Date();
-    $('#date').html(now.toLocaleDateString());
-}
-setDate();
 
 // // Randomly set background image
 
