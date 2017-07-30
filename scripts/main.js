@@ -30,16 +30,31 @@ $.ajax({
 
 
 // Randomly set background image
-let imgURL =      ['night.png',       'rocks.jpg',       'snow.png',          'tree.png',         'wagon.jpg',      'hug.png',      'faces.png']
-let imgPosition = ['center bottom',   'center bottom',    'center bottom',    'center center',    'left bottom',    'right bottom', 'right bottom']
-let index = Math.floor(Math.random() * imgURL.length)
-let i = 'url(../images/' + imgURL[index] + ')  no-repeat '
+let imgURL =       ['night.png',
+                    'rocks.jpg',
+                    'snow.png',
+                    'tree.png',
+                    'wagon.jpg',
+                    'hug.png',
+                    'faces.png'];
+let imgPosition =  ['center bottom',
+                    'center bottom',
+                    'center bottom',
+                    'center center',
+                    'left bottom',
+                    'right bottom', 
+                    'right bottom'];
+let index = Math.floor(Math.random() * imgURL.length);
+setBackground();
+
+//Change the background image every 30 seconds
+function setBackground() {
+  let i = 'url(../images/' + imgURL[index] + ')  no-repeat '
                          + imgPosition[index] + ' fixed';
-$('#main').css({
-  'background': i,
-  'background-size': 'cover'
-});
-
-
-
-
+  $('#main').css({
+    'background': i,
+    'background-size': 'cover'
+  });
+  index = (index + 1) % imgURL.length;
+  setTimeout(setBackground, 30000);
+}
