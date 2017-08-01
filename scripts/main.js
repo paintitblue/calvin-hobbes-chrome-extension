@@ -47,8 +47,8 @@ let imgPosition =  ['center bottom',
 let index = Math.floor(Math.random() * imgURL.length);
 setBackground();
 
-//Change the background image every 30 seconds
-function setBackground() {
+// Change background image to the next image
+function changeBackgroundOnce() {
   let i = 'url(../images/' + imgURL[index] + ')  no-repeat '
                          + imgPosition[index] + ' fixed';
   $('#main').css({
@@ -56,5 +56,13 @@ function setBackground() {
     'background-size': 'cover'
   });
   index = (index + 1) % imgURL.length;
-  setTimeout(setBackground, 30000);
 }
+
+// Change the background image every 30 seconds
+function setBackground() {
+  changeBackgroundOnce();
+  setTimeout(setBackground, 30 * 1000);
+}
+
+// Change background on click
+document.addEventListener("click", changeBackgroundOnce);
