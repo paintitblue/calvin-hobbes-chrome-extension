@@ -3,7 +3,7 @@ const now = new Date();
 $('#date').html(now.toDateString());
 
 //Get the comic
-const url = "http://www.gocomics.com/calvinandhobbes";
+const url = "https://www.comicsrss.com/preview/calvinandhobbes";
 const obj = localStorage.getItem('calvinandhobbes_url');
 if (obj) {
     $('#comic').attr('src', obj);
@@ -14,20 +14,13 @@ $.ajax({
     method: 'GET',
     crossDomain: true
 }).then((responseData) => {
-  html = $.parseHTML(responseData);
-  $.each(html, (i, el) => {
-      if (el.className === 'amu-container-global') {
-          const comicSrc = el.getElementsByClassName("item-comic-image")[0].children[0].src
-          if (!obj || comicSrc !== obj) {
-              localStorage.setItem('calvinandhobbes_url', comicSrc);
-              $('#comic').attr('src', comicSrc);
-          }
-      }
-  });
-}).fail((err) => {
-  console(err);
+    var url_start = responseData.indexOf("preview-comic", 0) + "preview-comic\" src=\"".length;
+    var url_end = responseData.indexOf("\">",url_start);
+    var comicSrc = responseData.substring(url_start, url_end);
+    localStorage.setItem('calvinandhobbes_url', comicSrc);
+    $('#comic').attr('src', comicSrc);}).fail((err) => {
+  console.log(err);
 });
-
 
 // Randomly set background image
 let imgURL =       ['night.png',
@@ -49,7 +42,7 @@ setBackground();
 
 // Change background image to the next image
 function changeBackgroundOnce() {
-  let i = 'url(../images/' + imgURL[index] + ')  no-repeat '
+  let i = 'url(images/' + imgURL[index] + ')  no-repeat '
                          + imgPosition[index] + ' fixed';
   $('#main').css({
     'background': i,
