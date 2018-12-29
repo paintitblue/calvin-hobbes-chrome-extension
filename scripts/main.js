@@ -11,6 +11,9 @@ var isSameDay = (dateSaved.getDate() == now.getDate()) &&
                 (dateSaved.getFullYear() == now.getFullYear());
 if (verse && isSameDay) {
     document.getElementById('verse').innerHTML = verse;
+    document.getElementById('verse').style.display == "block"
+    document.getElementById('txtbox').style.display = "none";
+    document.getElementById('verse_input').style.display = "none";
 }
 
 // Get the comic
@@ -74,6 +77,22 @@ function setVerse() {
   document.getElementById('verse').innerHTML = txt;
   localStorage.setItem('bible_verse', txt);
   localStorage.setItem('timestamp', now);
+}
+
+// Toggle the display of the input textbox and bible verse
+function toggle() {
+  if (document.getElementById('verse').style.display == "block") {
+    // show textbox
+    document.getElementById('verse').style.display = "none";
+    document.getElementById('txtbox').style.display = "inline-block";
+    document.getElementById('verse_input').style.display = "inline-block";
+  }
+  else if (verse && isSameDay) {
+    // show verse
+    document.getElementById('verse').style.display = "block";
+    document.getElementById('txtbox').style.display = "none";
+    document.getElementById('verse_input').style.display = "none";
+  }
 }
 
 // Change background on click

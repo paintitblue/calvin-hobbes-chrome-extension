@@ -7,8 +7,11 @@
 </head>
 <body id="main">
     <div class="container">
-
-    <div id="verse">Verse of the day <input type="text" id="verse_input" onkeyup="setVerse()"> </div>
+    <div id="wrapper">
+      <div id="txtbox" onclick="toggle()"> Verse of the day </div>
+      <input type="text" id="verse_input" onkeyup="setVerse()"/>
+    </div>
+    <div id="verse" onclick="toggle()"></div>
         <div class="comicContainer">
         <div id="date" align="middle"></div>
             <img id="comic" align="middle"/>

@@ -41,7 +41,7 @@ body {
     padding-top: 5px;
 }
 
-#verse {
+#verse, #txtbox {
     font-family: Georgia;
     max-width: 750px;
     max-height: 50%;
@@ -52,4 +52,9 @@ body {
     padding-right: 2px;
     padding-bottom: 2px;
     padding-left: 2px;
+}
+
+#verse_input {
+    font-family: Georgia;
+    background-color: white;
 }
