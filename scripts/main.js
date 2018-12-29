@@ -2,11 +2,22 @@
 const now = new Date();
 $('#date').html(now.toDateString());
 
-//Get the comic
+// Check if verse has been updated the same day
+const verse = localStorage.getItem('bible_verse');
+const timestamp = localStorage.getItem('timestamp');
+var dateSaved = new Date(Date.parse(timestamp));
+var isSameDay = (dateSaved.getDate() == now.getDate()) &&
+                (dateSaved.getMonth() == now.getMonth()) &&
+                (dateSaved.getFullYear() == now.getFullYear());
+if (verse && isSameDay) {
+    document.getElementById('verse').innerHTML = verse;
+}
+
+// Get the comic
 const url = "https://www.comicsrss.com/preview/calvinandhobbes";
 const obj = localStorage.getItem('calvinandhobbes_url');
 if (obj) {
-    $('#comic').attr('src', obj);
+    $('#comic').attr('src', obj); //set comic if previously saved
 }
 
 $.ajax({
@@ -35,7 +46,7 @@ let imgPosition =  ['center bottom',
                     'center bottom',
                     'center center',
                     'left bottom',
-                    'right bottom', 
+                    'right bottom',
                     'right bottom'];
 let index = Math.floor(Math.random() * imgURL.length);
 setBackground();
@@ -55,6 +66,14 @@ function changeBackgroundOnce() {
 function setBackground() {
   changeBackgroundOnce();
   setTimeout(setBackground, 30 * 1000);
+}
+
+// Set bible verse
+function setVerse() {
+  txt = document.getElementById('verse_input').value;
+  document.getElementById('verse').innerHTML = txt;
+  localStorage.setItem('bible_verse', txt);
+  localStorage.setItem('timestamp', now);
 }
 
 // Change background on click
